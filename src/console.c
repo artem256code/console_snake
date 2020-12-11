@@ -1,6 +1,9 @@
-#include "console.h"
+#include <malloc.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
+
+#include "console.h"
+
 struct winsize w;
 
 int getConsoleCol(){
@@ -11,4 +14,18 @@ int getConsoleCol(){
 int getConsoleRow(){
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     return w.ws_row;
+}
+
+
+struct Console* initConsole(struct Console *this){
+    this = (Console*) malloc(sizeof(Console));
+    this->columns   = getConsoleCol();
+    this->rows      = getConsoleRow();
+    char **buffer   = (char**) malloc(sizeof(char*) * this->rows);
+    for(int i = 0; i < this->rows; i++){
+        buffer[i] = (char*) malloc(sizeof(char) * this->columns);
+    }
+    this->buffer = buffer;
+
+    return this;
 }

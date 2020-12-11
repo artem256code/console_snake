@@ -1,17 +1,17 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-/**
- * @brief  Returns the number of console columns
- * @return numbers of columns
- */
-int getConsoleCol();
+typedef struct Console{
+    int columns;        // Numbers of console columns
+    int rows;           // Numbers of console rows
+    char **buffer;      // Buffer that stores the playing field
+} Console;
 
-
 /**
- * @brief  Returns the number of console rows
- * @return numbers of rows
+ * @brief initConsole   Create a console object
+ * @param this          Pointer to the console object
+ * @return              Pointer to the console object
  */
-int getConsoleRow();
+struct Console* initConsole(struct Console *this);
 
 #endif
