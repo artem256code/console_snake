@@ -26,6 +26,12 @@ struct Console* initConsole(struct Console *this){
         buffer[i] = (char*) malloc(sizeof(char) * this->columns);
     }
     this->buffer = buffer;
+    this->addToBuffer = _addToBuffer;
 
     return this;
+}
+
+
+static void _addToBuffer(struct Console *this, int row, int col, char sym){
+    this->buffer[row][col] = sym;
 }
