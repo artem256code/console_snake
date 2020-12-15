@@ -1,5 +1,5 @@
-#ifndef TESTS_H
-#define TESTS_H
+#ifndef TEST_RENDER_H
+#define TEST_RENDER_H
 
 /**
  * @brief Testing basic functions
