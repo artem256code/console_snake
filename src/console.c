@@ -1,3 +1,4 @@
+#include <termios.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -13,4 +14,11 @@ int getConsoleCol(){
 int getConsoleRow(){
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     return w.ws_row;
+}
+
+void ignoreCarriageReturns(){
+    struct termios term;
+    tcgetattr( STDIN_FILENO, &term );
+    term.c_lflag = IGNCR;
+    tcsetattr( STDIN_FILENO, TCSANOW, &term);
 }

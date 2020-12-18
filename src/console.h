@@ -5,4 +5,6 @@ int getConsoleCol();
 
 int getConsoleRow();
 
+void ignoreCarriageReturns();
+
 #endif // CONSOLE_H
