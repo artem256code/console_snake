@@ -11,12 +11,13 @@ typedef struct Point{
 
 typedef struct Snake{
     int lenght;                // Length of snake
-    Point *cells;              // First - head cell, then - subsequents cells
+    Point *body;               // First - head cell, then - subsequents cells
 
-    void (*moveUp)      (struct Snake *snake);
-    void (*moveDown)    (struct Snake *snake);
-    void (*moveLeft)    (struct Snake *snake);
-    void (*moveRight)   (struct Snake *snake);
+    void (*moveUp)      (struct Snake *self);
+    void (*moveDown)    (struct Snake *self);
+    void (*moveLeft)    (struct Snake *self);
+    void (*moveRight)   (struct Snake *self);
+    void (*del)         (struct Snake *self);
 } Snake;
 
 
