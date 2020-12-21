@@ -20,5 +20,7 @@ void ignoreCarriageReturns(){
     struct termios term;
     tcgetattr( STDIN_FILENO, &term );
     term.c_lflag = IGNCR;
+    term.c_iflag = IGNBRK;
+
     tcsetattr( STDIN_FILENO, TCSANOW, &term);
 }
