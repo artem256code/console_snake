@@ -9,25 +9,39 @@
 
 static int test_initRender(){
     Render *test = NULL;
+
     test = initRender(test);
-    if(test->columns <= 0 || test->rows <= 0 || test->buffer == NULL ||
-            test->addToBuffer == NULL || test->clear == NULL ||
-            test->render == NULL){
-        printf("test_initRender() failed...\n");
-        exit(EXIT_FAILURE);
-    }
+
+    assert(test->columns > 0);
+    assert(test->rows > 0);
+    assert(test->buffer != NULL);
+    assert(test->addToBuffer != NULL);
+    assert(test->clear != NULL);
+    assert(test->render != NULL);
+    assert(test->del != NULL);
     return 0;
 }
 
 
 static int test_addToBuffer(){
     Render *test = NULL;
+
+    test = initRender(test);
+    test->addToBuffer(test, 0, 10, '*');
+
+    assert(test->buffer[0][10] == '*');
+    return 0;
+}
+
+static int test_clear(){
+    Render *test = NULL;
+
     test = initRender(test);
 
-    test->addToBuffer(test, 0, 10, '*');
-    if(test->buffer[0][10] != '*'){
-        printf("test_addToBuffer() failed...\n");
-        exit(EXIT_FAILURE);
+    for(int i = 0; i < test->rows; i++){
+        for(int j = 0; j < test->columns; j++){
+            assert(test->buffer[i][j] == ' ');
+        }
     }
     return 0;
 }
@@ -35,5 +49,6 @@ static int test_addToBuffer(){
 int testing(){
     test_initRender();
     test_addToBuffer();
+    test_clear();
     return 0;
 }
