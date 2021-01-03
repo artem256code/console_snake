@@ -8,9 +8,17 @@ typedef struct Point{
     int y;
 } Point;
 
+enum{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN
+};
+
 
 typedef struct Snake{
     int lenght;                // Length of snake
+    int vector_direction;      // The direction vector (Up, Down, Left or Right)
     Point *body;               // First - head cell, then - subsequents cells
 
     void (*moveUp)      (struct Snake *self);
