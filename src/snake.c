@@ -12,6 +12,7 @@ static void offsetBody(Snake *self){
 }
 
 static int checkMove(Snake *self, int vector_direction){
+    if(self->lenght == 1)                                               return 1;
     if(self->vector_direction == UP     && vector_direction != DOWN)    return 1;
     if(self->vector_direction == DOWN   && vector_direction != UP)      return 1;
     if(self->vector_direction == LEFT   && vector_direction != RIGHT)   return 1;
@@ -67,13 +68,6 @@ Snake* initSnake(Snake *self){
     Point head_coords = {col/2, row/2};
     self->body[HEAD] = head_coords;
     self->lenght = 1;
-
-    for(int i = 0; i < 5; i++){
-        self->body[HEAD+i+1].x = self->body[HEAD].x + i + 1;
-        self->body[HEAD+i+1].y = self->body[HEAD].y;
-    }
-    self->lenght = 6;
-
 
     self->moveDown = _moveDown;
     self->moveLeft = _moveLeft;
