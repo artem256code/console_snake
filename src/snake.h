@@ -1,6 +1,8 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#include "fruit.h"
+
 #define HEAD  0
 
 typedef struct Point{
@@ -25,6 +27,8 @@ typedef struct Snake{
     void (*moveDown)    (struct Snake *self);
     void (*moveLeft)    (struct Snake *self);
     void (*moveRight)   (struct Snake *self);
+    void (*moveTo)      (struct Snake *self, int vector_direction);
+    void (*add)         (struct Snake *self);
     void (*del)         (struct Snake *self);
 } Snake;
 

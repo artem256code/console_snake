@@ -52,6 +52,37 @@ void _moveLeft(Snake *self){
     }
 }
 
+void _moveTo(Snake *self, int vector_direction){
+    switch (vector_direction){
+    case UP:
+        self->moveUp(self);
+        break;
+    case DOWN:
+        self->moveDown(self);
+        break;
+    case LEFT:
+        self->moveLeft(self);
+        break;
+    case RIGHT:
+        self->moveRight(self);
+        break;
+    }
+}
+
+void _add(Snake *self){
+    int newCell = self->lenght;
+    int endCell = self->lenght-1;
+
+    if(self->vector_direction == UP || self->vector_direction == DOWN){
+        self->body[newCell].x = self->body[endCell].x;
+        self->body[newCell].x = self->body[endCell].y + 1;
+    }
+    else{
+        self->body[newCell].x = self->body[endCell].x + 1;
+        self->body[newCell].x = self->body[endCell].y;
+    }
+    self->lenght++;
+}
 
 void _del(Snake *self){
     free(self->body);
@@ -73,6 +104,8 @@ Snake* initSnake(Snake *self){
     self->moveLeft = _moveLeft;
     self->moveRight = _moveRight;
     self->moveUp = _moveUp;
+    self->moveTo = _moveTo;
+    self->add = _add;
     self->del = _del;
 
     return self;

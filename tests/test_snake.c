@@ -16,6 +16,9 @@ static int test_initSnake(){
     assert(snake->moveLeft != NULL);
     assert(snake->moveRight != NULL);
     assert(snake->moveUp != NULL);
+    assert(snake->moveTo != NULL);
+    assert(snake->add != NULL);
+    assert(snake->del != NULL);
     return 0;
 }
 
@@ -63,11 +66,28 @@ static int test_moveRight(){
     return 0;
 }
 
+static int test_moveTo(){
+    Snake *snake = NULL;
+
+    snake = initSnake(snake);
+    snake->body[HEAD].x = 5;
+    snake->body[HEAD].y = 5;
+    snake->moveTo(snake, UP);
+    snake->moveTo(snake, DOWN);
+    snake->moveTo(snake, LEFT);
+    snake->moveTo(snake, RIGHT);
+
+    assert(snake->body[HEAD].x == 5);
+    assert(snake->body[HEAD].y == 5);
+    return 0;
+}
+
 int testing_snake(){
     test_initSnake();
     test_moveDown();
     test_moveUp();
     test_moveLeft();
     test_moveRight();
+    test_moveTo();
     return 0;
 }
